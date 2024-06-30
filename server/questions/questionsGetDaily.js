@@ -3,13 +3,15 @@ import mongoose from "mongoose"
 // Import schema
 import QuestionsSchema from "./questionsSchema.js"
 
-// API - HTTP Get One where isRead is false
+// API - HTTP Get One where useDate is today's date
 const questionsGetDaily = async (req, res) => {
   try {
     // Create question instance/model
     const Questions = mongoose.model("Questions", QuestionsSchema)
-    // Get 1 question by Id
-    const question = await Questions.findOneAndUpdate({ "isRead": false }, { "isRead": true })
+    // Get question with today's date
+    let date = new Date("2024-07-09");
+    let dateString = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
+    const question = await Questions.findOne({ "useDate": dateString })
     // API response
     res.status(200).json(question)
   }
