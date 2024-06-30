@@ -1,24 +1,32 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import Header from './Header'
+import { womenInCS } from './women-in-cs'
 import './App.css'
 
 function App() {
+  // TODO: Follow-up to above - automate that process? pm2? Node? Some gross Windows thing?
   // TODO: post student form submission to database
-  // TODO: Silly question generator - Need like ... I don't know 52 * 5 at the most
-  //     Needs to be one a day and need to keep track of what has been asked
-  //     Have 15, need more
+  // TODO: Add number of responses to each field
+  // TODO: Add clickable element or easter egg to show more info on women in cs
+  // RODO: MAYBE - Have some sort of logic to only show during course days? I could literally just not fire up the server until those days. Not sure yet.
 
-  const [ question, setQuestion ] = useState({})
+  const [ question, setQuestion ] = useState("")
+  const [ placeHolder, setPlaceHolder ] = useState({})
 
-  // Get daily question
   useEffect(() => {
     return () => {
+      // Get women in CS placeholder person
+      const date = new Date()
+      const day = date.toLocaleDateString("en-US", { day: "numeric" }) - 1 // getDate returns the actual day, 1 based, but we need to convert it to an index, 0 based, so - 1
+      const index = day < 17 ? day : day - 17
+      setPlaceHolder(womenInCS[index])
+      // Get daily question
       let server = "http://localhost:8888"
       axios.get(`${server}/questions/daily`)
         .then(function (response) {
           console.log(response)
-          setQuestion(response.data)
+          setQuestion(response.data.question)
         })
         .catch(function (error) {
           console.log(error)
@@ -33,7 +41,11 @@ function App() {
 
   return (
     <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
-      <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-y=.8&w=2830&h=1500&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply" alt="" className="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center" />
+      <img
+        // src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-y=.8&w=2830&h=1500&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply"
+        src="https://images.unsplash.com/photo-1531547977107-a5f0f32d6d87?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&crop=focalpoint&fp-y=.8&w=2830&h=1500&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply"
+        alt=""
+        className="opacity-50 absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center" />
       <div className="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl" aria-hidden="true">
         <div className="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-20" style={{ clipPath: "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" }}></div>
       </div>
@@ -59,14 +71,23 @@ function App() {
                   <label className="block uppercase tracking-wide text-gray-200 text-sm font-bold mb-2" htmlFor="grid-first-name">
                     First Name
                   </label>
-                  <input className="appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-200" id="grid-first-name" type="text" placeholder="Jane" />
-                  <p className="text-red-500 text-sm italic">Please fill out this field.</p>
+                  <input
+                    id="grid-first-name"
+                    className="appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-200"
+                    type="text"
+                    placeholder={placeHolder.firstName} />
+                  <p className="text-pink-600 text-sm italic">Please fill out the first name.</p>
                 </div>
                 <div className="w-full md:w-1/2 px-3">
                   <label className="block uppercase tracking-wide text-gray-200 text-sm font-bold mb-2" htmlFor="grid-last-name">
                     Last Name
                   </label>
-                  <input className="appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:border-gray-200" id="grid-last-name" type="text" placeholder="Doe" />
+                  <input
+                    id="grid-last-name"
+                    className="appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:border-gray-200"
+                    type="text"
+                    placeholder={placeHolder.lastName} />
+                  <p className="text-pink-600 text-sm italic mt-3">Please fill out the last name.</p>
                 </div>
               </div>
               <div className="flex flex-wrap -mx-3 mb-6">
@@ -84,13 +105,13 @@ function App() {
               <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full px-3">
                   <label className="block uppercase tracking-wide text-gray-200 text-sm font-bold mb-2" htmlFor="silly">
-                    {question.question}
+                    {question}
                   </label>
                   <input
                     id="silly"
                     className="appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-200"
                     type="text"
-                    placeholder={question.question} />
+                    placeholder={question} />
                 </div>
               </div>
               <div className="flex flex-wrap -mx-3 mb-6">
@@ -98,11 +119,11 @@ function App() {
                   <label className="block uppercase tracking-wide text-gray-200 text-sm font-bold mb-2" htmlFor="mood">
                     Which mood do you relate to the most today? 1 Being the highest/best and 9 being the lowest.
                   </label>
-                  <div className="tracking-wide text-gray-400 text-xs font-bold mb-2">9 responses</div>
+                  {/* <div className="tracking-wide text-gray-400 text-xs font-bold mb-2">9 responses</div> */}
                   <div className="relative">
                     <select
                       id="mood"
-                      className="block appearance-none w-1/4 bg-gray-700 border border-gray-700 text-gray-100 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:border-gray-200">
+                      className="block w-1/5 appearance-none bg-gray-700 border border-gray-700 text-gray-100 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:border-gray-200">
                       <option>1</option>
                       <option>2</option>
                       <option>3</option>
@@ -113,9 +134,9 @@ function App() {
                       <option>8</option>
                       <option>9</option>
                     </select>
-                    {/* <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <div className="pointer-events-none absolute inset-y-0 left-16 flex items-center px-2 text-purple-400">
                       <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
-                    </div> */}
+                    </div>
                   </div>
                 </div>
               </div>
