@@ -9,7 +9,8 @@ const questionsGetDaily = async (req, res) => {
     // Create question instance/model
     const Questions = mongoose.model("Questions", QuestionsSchema)
     // Get question with today's date
-    let date = new Date()
+    let date = new Date("2024-07-12")
+    // let date = new Date()
     let dateString = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
     const question = await Questions.findOne({ "useDate": dateString })
     // API response
