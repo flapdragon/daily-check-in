@@ -2,8 +2,8 @@ import express from 'express'
 import questionsGetDaily from './questionsGetDaily.js'
 import questionsCreate from './questionsCreate.js'
 
-// TODO: create submissions schema, endpoints
-// TODO: create charts
+// TODO: responses create
+// TODO: responses get
 
 const router = express.Router()
 

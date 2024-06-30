@@ -1,18 +1,29 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useId } from 'react'
 import axios from 'axios'
 import Header from './Header'
 import { womenInCS } from './women-in-cs'
 import './App.css'
 
+// Hard code that server! Yeah!
+let server = "http://localhost:8888"
+
 function App() {
+  // TODO: MAYBE - Have some sort of logic to only show during course days? I could literally just not fire up the server until those days. Not sure yet.
   // TODO: Follow-up to above - automate that process? pm2? Node? Some gross Windows thing?
-  // TODO: post student form submission to database
   // TODO: Add number of responses to each field
   // TODO: Add clickable element or easter egg to show more info on women in cs
-  // RODO: MAYBE - Have some sort of logic to only show during course days? I could literally just not fire up the server until those days. Not sure yet.
+  // TODO: What to do once the form is submitted?
 
   const [ question, setQuestion ] = useState("")
   const [ placeHolder, setPlaceHolder ] = useState({})
+  const [ firstName, setFirstName ] = useState("")
+  const [ lastName, setLastName ] = useState("")
+  const [ grateful, setGrateful ] = useState("")
+  const [ silly, setSilly ] = useState("")
+  const [ mood, setMood ] = useState("1")
+  const [ concerns, setConcerns ] = useState("")
+
+  const moodSelectId = useId()
 
   useEffect(() => {
     return () => {
@@ -22,7 +33,6 @@ function App() {
       const index = day < 17 ? day : day - 17
       setPlaceHolder(womenInCS[index])
       // Get daily question
-      let server = "http://localhost:8888"
       axios.get(`${server}/questions/daily`)
         .then(function (response) {
           console.log(response)
@@ -36,7 +46,26 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Do stuff
+    if (
+      (!firstName || firstName.length === 0) ||
+      (!lastName || lastName.length === 0)
+    ) {
+      // Don't do stuff
+    }
+    else {
+      // Build student daily check-in response
+      const studentResponse = { firstName, lastName, grateful, silly, mood, concerns }
+      console.log(studentResponse)
+      // Submit student response
+      axios.post(`${server}/responses`, studentResponse)
+        .then(function (response) {
+          console.log(response)
+          // Take action to show submission
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    }
   }
 
   return (
@@ -73,6 +102,8 @@ function App() {
                   </label>
                   <input
                     id="grid-first-name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                     className="appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-200"
                     type="text"
                     placeholder={placeHolder.firstName} />
@@ -84,6 +115,8 @@ function App() {
                   </label>
                   <input
                     id="grid-last-name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
                     className="appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:border-gray-200"
                     type="text"
                     placeholder={placeHolder.lastName} />
@@ -97,6 +130,8 @@ function App() {
                   </label>
                   <textarea
                     id="grateful"
+                    value={grateful}
+                    onChange={(e) => setGrateful(e.target.value)}
                     rows="4"
                     className="block p-2.5 w-full text-sm text-gray-100 bg-gray-700 rounded-lg border border-gray-700 focus:outline-none focus:border-gray-200"
                     placeholder="What is something you are grateful for today?"></textarea>
@@ -109,6 +144,8 @@ function App() {
                   </label>
                   <input
                     id="silly"
+                    value={silly}
+                    onChange={(e) => setSilly(e.target.value)}
                     className="appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-200"
                     type="text"
                     placeholder={question} />
@@ -122,17 +159,18 @@ function App() {
                   {/* <div className="tracking-wide text-gray-400 text-xs font-bold mb-2">9 responses</div> */}
                   <div className="relative">
                     <select
-                      id="mood"
+                      id={mood}
+                      onChange={(e) => setMood(e.target.value)}
                       className="block w-1/5 appearance-none bg-gray-700 border border-gray-700 text-gray-100 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:border-gray-200">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                      <option>6</option>
-                      <option>7</option>
-                      <option>8</option>
-                      <option>9</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
                     </select>
                     <div className="pointer-events-none absolute inset-y-0 left-16 flex items-center px-2 text-purple-400">
                       <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
@@ -147,6 +185,8 @@ function App() {
                   </label>
                   <textarea
                     id="concerns"
+                    value={concerns}
+                    onChange={(e) => setConcerns(e.target.value)}
                     rows="4"
                     className="block p-2.5 w-full text-sm text-gray-100 bg-gray-700 rounded-lg border border-gray-700 focus:outline-none focus:border-gray-200"
                     placeholder="Anything I can do for you today? Any concerns or comments or questions?"></textarea>
@@ -169,3 +209,5 @@ function App() {
 }
 
 export default App
+
+// NOTES: Selects in React => (useId) https://react.dev/reference/react-dom/components/select, useRef is what used to be recommended

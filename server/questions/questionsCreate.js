@@ -5,7 +5,6 @@ import QuestionsSchema from "./questionsSchema.js"
 
 // API - HTTP Post
 const questionsCreate = async (req, res) => {
-  console.log(req.body, typeof req.body.useDate)
   // Get values from body
   let { question, useDate, rating = 0 } = req.body
   console.log( question, useDate, rating )
@@ -21,9 +20,9 @@ const questionsCreate = async (req, res) => {
   // If valid, create
   else {
     try {
-      // Create product instance/model
+      // Create question instance/model
       const Questions = mongoose.model("Questions", QuestionsSchema)
-      // Create product record
+      // Create question record
       await Questions.create({
         question, useDate, rating
       })
