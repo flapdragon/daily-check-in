@@ -2,7 +2,10 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import questionsRoutes from './questions/index.js'
+import responsesRoutes from './responses/index.js'
 
+// TODO: create responses schema, endpoints
+// TODO: create charts
 // TODO: Add individual IPs to CORS
 // TODO: Silly question generator - Need like ... I don't know 52 * 5 at the most
 //     Needs to be one a day and need to keep track of what has been asked or hard-coded with the day
@@ -27,8 +30,9 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-// Questions routes
+// Routes, plural
 app.use('/questions', questionsRoutes)
+app.use('/responses', responsesRoutes)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
