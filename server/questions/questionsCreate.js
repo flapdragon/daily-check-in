@@ -3,15 +3,18 @@ import mongoose from "mongoose"
 // Import schema
 import QuestionsSchema from "./questionsSchema.js"
 
-// 3. API - HTTP Post
+// API - HTTP Post
 const questionsCreate = async (req, res) => {
-  console.log(req.body)
+  console.log(req.body, typeof req.body.useDate)
   // Get values from body
-  let { question, isRead = false, rating = 0 } = req.body
-  console.log( question, isRead, rating )
+  let { question, useDate, rating = 0 } = req.body
+  console.log( question, useDate, rating )
   // Validation
   // If required parameters aren't valid
-  if ( !question || question.length === 0 ) {
+  if (
+    (!question || question.length === 0) ||
+    (!useDate || !isNaN(useDate))
+  ) {
       console.log("Error: Post parameters are not valid.")
       res.status(500).send("Error: Post parameters are not valid.")
   }
@@ -20,11 +23,11 @@ const questionsCreate = async (req, res) => {
     try {
       // Create product instance/model
       const Questions = mongoose.model("Questions", QuestionsSchema)
-      // 7. Create product record
+      // Create product record
       await Questions.create({
-        question, isRead, rating
+        question, useDate, rating
       })
-      // 8. API response
+      // API response
       res.status(200).json({ "message": "Success. Record created." })
     }
     catch (err) {

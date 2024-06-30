@@ -1,5 +1,5 @@
 const questions = [
-  "If you could have any superpower, what would it be and why?",
+  "If you could have any superpower, what would it be?",
   "What would you do if you woke up tomorrow as your teacher?",
   "If you could only eat one food for the rest of your life, what would it be?",
   "Do you think dogs or cats are cooler?",

@@ -1,20 +1,36 @@
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import Header from './Header'
 import './App.css'
 
 function App() {
+  // TODO: post student form submission to database
   // TODO: Silly question generator - Need like ... I don't know 52 * 5 at the most
   //     Needs to be one a day and need to keep track of what has been asked
-  // TODO: Need to start using Git
+  //     Have 15, need more
+
+  const [ question, setQuestion ] = useState({})
+
+  // Get daily question
+  useEffect(() => {
+    return () => {
+      let server = "http://localhost:8888"
+      axios.get(`${server}/questions/daily`)
+        .then(function (response) {
+          console.log(response)
+          setQuestion(response.data)
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    }
+  }, [])
+
   const handleSubmit = (e) => {
     e.preventDefault()
     // Do stuff
   }
 
-  // 1. What is something you are grateful for today?
-  // 2. Silly Question => What is the best kind of shoe?
-  // 3. Which mood do you relate to the most today?
-  // 4. Anything I can do for you today? Any concerns or comments or questions?
-  // dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
   return (
     <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
       <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-y=.8&w=2830&h=1500&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply" alt="" className="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center" />
@@ -68,13 +84,13 @@ function App() {
               <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full px-3">
                   <label className="block uppercase tracking-wide text-gray-200 text-sm font-bold mb-2" htmlFor="silly">
-                    What is the best kind of shoe?
+                    {question.question}
                   </label>
                   <input
                     id="silly"
                     className="appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-200"
                     type="text"
-                    placeholder="What is the best kind of shoe?" />
+                    placeholder={question.question} />
                 </div>
               </div>
               <div className="flex flex-wrap -mx-3 mb-6">
