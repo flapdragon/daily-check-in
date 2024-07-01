@@ -20,7 +20,7 @@ const responsesCreate = async (req, res) => {
     (!lastName || lastName.length === 0)
   ) {
       console.log("Error: Post parameters are not valid.")
-      res.status(500).send("Error: Post parameters are not valid.")
+      res.status(500).send("Error: API parameters are not valid.")
   }
   // If valid, create
   else {
