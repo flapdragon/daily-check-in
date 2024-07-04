@@ -27,8 +27,22 @@ const CheckIn = () => {
   const server = "http://localhost:8888"
   // const server = "http://192.168.0.33:8888"
 
+  // OnLoad
   useEffect(() => {
     return () => {
+      // Check if user has already submitted daily check-in
+      axios.get(`${server}/responses/check-submitted`)
+      .then(function (response) {
+        console.log(response.data)
+        // If user has already submitted daily check-in
+        if (response.data.submitted) {
+          navigate("/confirmation")
+        }
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+
       // Get women in CS placeholder person
       setPlaceHolder(womanInCS)
       // Get daily question
@@ -58,7 +72,7 @@ const CheckIn = () => {
       // Submit student response
       axios.post(`${server}/responses`, studentResponse)
         .then(function (response) {
-          // Take action to show submission
+          // On submit success navigate to confirmation page
           navigate("/confirmation")
         })
         .catch(function (error) {
