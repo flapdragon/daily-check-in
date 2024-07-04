@@ -1,52 +1,19 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { useEffect } from 'react'
 import * as d3 from 'd3'
 
-const MoodChart = ({ id }) => {
-  const [moodData, setMoodData] = useState([])
-
-  // Hard code that server! Yeah!
-  const server = "http://localhost:8888"
-
+const MoodChart = ({ moodData }) => {
+  // When data passed in draw chart
   useEffect(() => {
     return () => {
-      // Get student mood data, one day of data, today's date
-      const date = new Date()
-      // Format date as YYYY/MM/DD, should I make this a function somewhere?
-      const today = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
-      axios.get(`${server}/responses/moods/${today}`)
-        .then(function (response) {
-          console.log(response)
-          setMoodData(response.data)
-          // If data
-          if (response.data.length > 0) {
-            // Run d3 drawChart function
-          drawChart(response.data)
-          }
-          else {
-            // Show something else, like no Data
-          }
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
+      // If data
+      if (moodData.length > 0) {
+        // Run d3 drawChart function
+        drawChart(moodData)
+      }
     }
-  }, [])
+  }, [moodData])
 
   const drawChart = (data) => {
-    // Temp data
-    // const data = moodData.length > 0 ? moodData : [
-    //   { name: "1", value: 1 },
-    //   { name: "2", value: 4 },
-    //   { name: "3", value: 2 },
-    //   { name: "4", value: 5 },
-    //   { name: "5", value: 3 },
-    //   { name: "6", value: 3 },
-    //   { name: "7", value: 1 },
-    //   // { name: "8", value: 0 },
-    //   { name: "9", value: 1 },
-    // ]
-
     // Specify the chart’s dimensions.
     const width = 928;
     const height = Math.min(width, 500);
@@ -110,7 +77,7 @@ const MoodChart = ({ id }) => {
         .attr("y", "0.7em")
         .attr("fill-opacity", 0.7)
         .text(d => d.data.value.toLocaleString("en-US")));
-      
+
     return svg.node();
   }
 

@@ -1,7 +1,7 @@
 import { useState, useEffect, useId } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { womenInCS } from '../women-in-cs'
+import { womanInCS } from './womenInCS'
 
 const CheckIn = () => {
   // TODO: MAYBE - Have some sort of logic to only show during course days? I could literally just not fire up the server until those days. Not sure yet.
@@ -30,10 +30,7 @@ const CheckIn = () => {
   useEffect(() => {
     return () => {
       // Get women in CS placeholder person
-      const date = new Date()
-      const day = date.toLocaleDateString("en-US", { day: "numeric" }) - 1 // getDate returns the actual day, 1 based, but we need to convert it to an index, 0 based, so - 1
-      const index = day < 17 ? day : day - 17
-      setPlaceHolder(womenInCS[index])
+      setPlaceHolder(womanInCS)
       // Get daily question
       axios.get(`${server}/questions/daily`)
         .then(function (response) {
