@@ -1,4 +1,5 @@
 import { useState, useEffect, useId } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { womenInCS } from '../women-in-cs'
 
@@ -20,8 +21,11 @@ const CheckIn = () => {
 
   const moodSelectId = useId()
 
+  const navigate = useNavigate()
+
   // Hard code that server! Yeah!
   const server = "http://localhost:8888"
+  // const server = "http://192.168.0.33:8888"
 
   useEffect(() => {
     return () => {
@@ -48,7 +52,7 @@ const CheckIn = () => {
       (!firstName || firstName.length === 0) ||
       (!lastName || lastName.length === 0)
     ) {
-      // Don't do stuff
+      // TODO: Add validation/warning
     }
     else {
       // Build student daily check-in response
@@ -57,8 +61,8 @@ const CheckIn = () => {
       // Submit student response
       axios.post(`${server}/responses`, studentResponse)
         .then(function (response) {
-          console.log(response)
           // Take action to show submission
+          navigate("/confirmation")
         })
         .catch(function (error) {
           console.log(error)
