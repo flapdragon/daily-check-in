@@ -2,13 +2,15 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { womanInCS } from './womenInCS'
 import MoodChart from '../charts/MoodChart'
+import { server } from '../utils'
+
+console.log(server)
+
+// TODO: Add more background images (already downloaded)
 
 const Confirmation = () => {
   const [ csWoman, setCSWoman ] = useState(womanInCS)
   const [ moodData, setMoodData ] = useState([])
-
-  // Hard code that server! Yeah!
-  const server = "http://localhost:8888"
 
   // Get daily mood chart data
   useEffect(() => {
@@ -19,7 +21,7 @@ const Confirmation = () => {
       const today = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
       axios.get(`${server}/responses/moods/${today}`)
         .then(function (response) {
-          console.log(response)
+          console.log(response.data)
           // If data
           if (response.data.length > 0) {
             setMoodData(response.data)

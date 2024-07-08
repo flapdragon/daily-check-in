@@ -2,6 +2,7 @@ import { useState, useEffect, useId } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { womanInCS } from './womenInCS'
+import { server } from '../utils'
 
 const CheckIn = () => {
   // TODO: MAYBE - Have some sort of logic to only show during course days? I could literally just not fire up the server until those days. Not sure yet.
@@ -22,10 +23,6 @@ const CheckIn = () => {
   const moodSelectId = useId()
 
   const navigate = useNavigate()
-
-  // Hard code that server! Yeah!
-  const server = "http://localhost:8888"
-  // const server = "http://192.168.0.33:8888"
 
   // OnLoad
   useEffect(() => {
