@@ -20,7 +20,8 @@ const CheckIn = () => {
   const [ mood, setMood ] = useState("1")
   const [ concerns, setConcerns ] = useState("")
   const [ canSubmit, setCanSubmit ] = useState(false)
-  const [ showError, setShowError ] = useState(false)
+  const [ showLoadError, setShowLoadError ] = useState(false)
+  const [ showSubmitError, setShowSubmitError ] = useState(false)
 
   const moodSelectId = useId()
 
@@ -35,7 +36,7 @@ const CheckIn = () => {
     })
     .catch(function (error) {
       console.log(error.message)
-      setShowError(true)
+      setShowLoadError(true)
     })
   }
 
@@ -53,7 +54,7 @@ const CheckIn = () => {
         })
         .catch(function (error) {
           console.log(error.message)
-          setShowError(true)
+          setShowLoadError(true)
         })
 
       // Get women in CS placeholder person
@@ -93,9 +94,9 @@ const CheckIn = () => {
         })
         .catch(function (error) {
           console.log(error.message)
-          // TODO: On submit error, disable submit button and show error message
-          // setCanSubmit(false)
-          // setShowError(true)
+          // On submit error, show submit error message and re-enable submit button
+          setShowSubmitError(true)
+          setCanSubmit(true)
         })
     }
   }
@@ -124,7 +125,7 @@ const CheckIn = () => {
             Please submit by 8:05am
           </p>
         </div>
-        {showError &&
+        {showLoadError &&
           <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
             <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-2">
               <div role="alert">
@@ -132,7 +133,21 @@ const CheckIn = () => {
                   Error
                 </div>
                 <div className="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-pink-700">
-                  <p>There was an error submitting/loading the form. Please let your instructor know. Please do not refresh the page as you will lose your work. Thank you for your patience. 😅</p>
+                  <p>There was an error loading the form. Please let your instructor know. Once it is announced that the server is back up, please refresh the page. Thank you for your patience. 😅</p>
+                </div>
+              </div>
+            </dl>
+          </div>
+        }
+        {showSubmitError &&
+          <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
+            <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-2">
+              <div role="alert">
+                <div className="bg-pink-700 text-white font-bold rounded-t px-4 py-2">
+                  Error
+                </div>
+                <div className="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-pink-700">
+                  <p>There was an error submitting the form. Please let your instructor know. Please DO NOT refresh the page because you will lose your work. Once it is announced that the server is back up, please click submit. Thank you for your patience. 😅</p>
                 </div>
               </div>
             </dl>
