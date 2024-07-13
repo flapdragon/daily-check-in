@@ -19,50 +19,69 @@ const CheckIn = () => {
   const [ silly, setSilly ] = useState("")
   const [ mood, setMood ] = useState("1")
   const [ concerns, setConcerns ] = useState("")
+  const [ canSubmit, setCanSubmit ] = useState(false)
+  const [ showError, setShowError ] = useState(false)
 
   const moodSelectId = useId()
 
   const navigate = useNavigate()
+
+  const getDailyQuestion = () => {
+    // Get daily question
+    axios.get(`${server}/questions/daily`)
+    .then(function (response) {
+      console.log(response)
+      setQuestion(response.data.question)
+    })
+    .catch(function (error) {
+      console.log(error.message)
+      setShowError(true)
+    })
+  }
 
   // OnLoad
   useEffect(() => {
     return () => {
       // Check if user has already submitted daily check-in
       axios.get(`${server}/responses/check-submitted`)
-      .then(function (response) {
-        console.log(response.data)
-        // If user has already submitted daily check-in
-        if (response.data.submitted) {
-          navigate("/confirmation")
-        }
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
+        .then(function (response) {
+          console.log(response.data)
+          // If user has already submitted daily check-in
+          if (response.data.submitted) {
+            navigate("/confirmation")
+          }
+        })
+        .catch(function (error) {
+          console.log(error.message)
+          setShowError(true)
+        })
 
       // Get women in CS placeholder person
       setPlaceHolder(womanInCS)
       // Get daily question
-      axios.get(`${server}/questions/daily`)
-        .then(function (response) {
-          console.log(response)
-          setQuestion(response.data.question)
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
+      getDailyQuestion()
     }
   }, [])
 
+  // Form validation
+  useEffect(() => {
+    const canSubmitForm = () => {
+      if (firstName.length > 0 && lastName.length > 0) {
+        setCanSubmit(true)
+      }
+      else {
+        setCanSubmit(false)
+      }
+    }
+    canSubmitForm()
+  }, [firstName, lastName])
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (
-      (!firstName || firstName.length === 0) ||
-      (!lastName || lastName.length === 0)
-    ) {
-      // TODO: Add validation/warning
-    }
-    else {
+    // If first and last name filled out
+    if (firstName.length > 0 && lastName.length > 0) {
+      // On submit, disable submit button to prevent multiple submissions
+      setCanSubmit(false)
       // Build student daily check-in response
       const studentResponse = { firstName, lastName, grateful, silly, mood, concerns }
       console.log(studentResponse)
@@ -73,7 +92,10 @@ const CheckIn = () => {
           navigate("/confirmation")
         })
         .catch(function (error) {
-          console.log(error)
+          console.log(error.message)
+          // TODO: On submit error, disable submit button and show error message
+          // setCanSubmit(false)
+          // setShowError(true)
         })
     }
   }
@@ -102,6 +124,20 @@ const CheckIn = () => {
             Please submit by 8:05am
           </p>
         </div>
+        {showError &&
+          <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
+            <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-2">
+              <div role="alert">
+                <div className="bg-pink-700 text-white font-bold rounded-t px-4 py-2">
+                  Error
+                </div>
+                <div className="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-pink-700">
+                  <p>There was an error submitting/loading the form. Please let your instructor know. Please do not refresh the page as you will lose your work. Thank you for your patience. 😅</p>
+                </div>
+              </div>
+            </dl>
+          </div>
+        }
         <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
           <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-2">
             <form className="w-full max-w-lg" onSubmit={handleSubmit}>
@@ -206,7 +242,8 @@ const CheckIn = () => {
                 <div className="w-full px-3"></div>
                 <button
                   type="submit"
-                  className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+                  disabled={canSubmit === false}
+                  className={`bg-purple-500 text-white font-bold py-2 px-4 rounded ${canSubmit === false ? 'opacity-50 cursor-not-allowed' : 'hover:bg-purple-700'}`}>
                   Submit
                 </button>
               </div>
