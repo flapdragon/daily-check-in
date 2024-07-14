@@ -130,7 +130,7 @@ const CheckIn = () => {
             <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-2">
               <div role="alert">
                 <div className="bg-pink-700 text-white font-bold rounded-t px-4 py-2">
-                  Error
+                  Loading Error
                 </div>
                 <div className="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-pink-700">
                   <p>There was an error loading the form. Please let your instructor know. Once it is announced that the server is back up, please refresh the page. Thank you for your patience. 😅</p>
@@ -144,7 +144,7 @@ const CheckIn = () => {
             <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-2">
               <div role="alert">
                 <div className="bg-pink-700 text-white font-bold rounded-t px-4 py-2">
-                  Error
+                  Submit Error
                 </div>
                 <div className="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-pink-700">
                   <p>There was an error submitting the form. Please let your instructor know. Please DO NOT refresh the page because you will lose your work. Once it is announced that the server is back up, please click submit. Thank you for your patience. 😅</p>
