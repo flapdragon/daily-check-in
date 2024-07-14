@@ -1,9 +1,7 @@
 import { useState, useEffect, useId } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { womanInCS } from './womenInCS'
-import { server, dailyImage } from '../utils'
-// import backgroundImage from `../images/${dailyImage}`
+import { server, dailyImage, womanInCS } from '../utils/utils'
 
 const CheckIn = () => {
   // TODO: MAYBE - Have some sort of logic to only show during course days? I could literally just not fire up the server until those days. Not sure yet.
@@ -32,7 +30,6 @@ const CheckIn = () => {
     // Get daily question
     axios.get(`${server}/questions/daily`)
     .then(function (response) {
-      console.log(response)
       setQuestion(response.data.question)
     })
     .catch(function (error) {
@@ -47,7 +44,6 @@ const CheckIn = () => {
       // Check if user has already submitted daily check-in
       axios.get(`${server}/responses/check-submitted`)
         .then(function (response) {
-          console.log(response.data)
           // If user has already submitted daily check-in
           if (response.data.submitted) {
             navigate("/confirmation")
@@ -86,7 +82,6 @@ const CheckIn = () => {
       setCanSubmit(false)
       // Build student daily check-in response
       const studentResponse = { firstName, lastName, grateful, silly, mood, concerns }
-      console.log(studentResponse)
       // Submit student response
       axios.post(`${server}/responses`, studentResponse)
         .then(function (response) {
@@ -107,7 +102,7 @@ const CheckIn = () => {
       <img
         src={require(`../images/${dailyImage}`)}
         alt=""
-        className="opacity-50 brightness-05 absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center" />
+        className="opacity-50 brightness-08 absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center" />
       <div className="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl" aria-hidden="true">
         <div className="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-20" style={{ clipPath: "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" }}></div>
       </div>
