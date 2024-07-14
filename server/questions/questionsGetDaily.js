@@ -9,10 +9,12 @@ const questionsGetDaily = async (req, res) => {
     // Create question instance/model
     const Questions = mongoose.model("Questions", QuestionsSchema)
     // Get question with today's date
-    // TODO: Remove hard coded question date
-    let date = new Date("2024-07-09")
+    const today = new Date()
+    // If weekday, use actual date, else use hard-coded date (for UTC do +7)
+    const date = today.getDay() > 0 && today.getDay() < 6 ? today : new Date("2024-07-08T07:00:01.000Z")
     // let date = new Date()
-    let dateString = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
+    let dateString = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`
+    // Get daily question from MongoDB questions collection
     const question = await Questions.findOne({ "useDate": dateString })
     // API response
     res.status(200).json(question)
