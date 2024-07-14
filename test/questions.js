@@ -6,7 +6,8 @@ import { questions } from "./questions-data.js"
 // useDate: Boolean,
 // rating: Number // TODO: Not implemented yet, thinking of a do you like this question kind of thing for feedback
 
-const action = "bulk_create"
+const action = "bulk_add"
+const startAt = 15
 const id = ""
 const port = 8888
 let question = {}
@@ -29,6 +30,26 @@ switch (action) {
               }
           }
         )
+      })
+      break
+
+    case "bulk_add":
+      console.log("bulk_add")
+      const questionsToAdd = questions.slice(startAt)
+      questionsToAdd.map((question, index) => {
+        console.log("map", question)
+          request.post(
+            `http://localhost:${port}/questions/`,
+            { json: question },
+            function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    console.log(body)
+                }
+                else {
+                  console.log(error)
+                }
+            }
+          )
       })
       break
 }
