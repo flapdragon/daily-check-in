@@ -97,6 +97,13 @@ const CheckIn = () => {
     }
   }
 
+  // Prevent default behavior of enter key submitting form while user in text input field
+  const onKeyPush = (e) => {
+    if (e.keyCode === 13) {
+      e.preventDefault()
+    }
+  }
+
   return (
     <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
       <img
@@ -160,6 +167,7 @@ const CheckIn = () => {
                     id="grid-first-name"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
+                    onKeyDown={onKeyPush}
                     className="appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-200"
                     type="text"
                     placeholder={placeHolder.firstName} />
@@ -173,6 +181,7 @@ const CheckIn = () => {
                     id="grid-last-name"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
+                    onKeyDown={onKeyPush}
                     className="appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:border-gray-200"
                     type="text"
                     placeholder={placeHolder.lastName} />
@@ -202,6 +211,7 @@ const CheckIn = () => {
                     id="silly"
                     value={silly}
                     onChange={(e) => setSilly(e.target.value)}
+                    onKeyDown={onKeyPush}
                     className="appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-200"
                     type="text"
                     placeholder={question} />
