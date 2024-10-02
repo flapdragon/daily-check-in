@@ -228,4 +228,74 @@ export const questions = [
     useDate: "2024-09-09",
     rating: 0
   },
+  {
+    question: "If you came with a warning label, what would it say?",
+    useDate: "2024-09-10",
+    rating: 0
+  },
+  {
+    question: "What reality TV show would you be on, if you had to be on one?",
+    useDate: "2024-09-11",
+    rating: 0
+  },
+  {
+    question: "What’s the most realistic animal sound you can make?",
+    useDate: "2024-09-12",
+    rating: 0
+  },
+  {
+    question: "If you could ride any animal, real or imaginary, to and from class every day, which one would you choose?",
+    useDate: "2024-09-13",
+    rating: 0
+  },
+  {
+    question: "Can pigeons swim?",
+    useDate: "2024-09-16",
+    rating: 0
+  },
+  {
+    question: "What do you call a group of pigeons?",
+    useDate: "2024-09-17",
+    rating: 0
+  },
+  {
+    question: "At your peak strength, how many pigeons do you think you could carry?",
+    useDate: "2024-09-18",
+    rating: 0
+  },
+  {
+    question: "You have saved a pigeon's life. You have named it Peggy. In gratitude for saving its life it has agreed to do chores for you. What will you teach it to do?",
+    useDate: "2024-09-19",
+    rating: 0
+  },
+  {
+    question: "You wake up as a pigeon. How do you let your best friend know it's you?",
+    useDate: "2024-09-20",
+    rating: 0
+  },
+  {
+    question: "You have been tasked with designing the new uniforms for Perryville. You have to use a gradient. Which type of gradient and which colors do you use?",
+    useDate: "2024-09-23",
+    rating: 0
+  },
+  {
+    question: "You are a vegetable, and you have been captured by the Romans and forced to fight in the arena against other vegetables. What vegetable would you be to give you the best chance of winning?",
+    useDate: "2024-09-24",
+    rating: 0
+  },
+  {
+    question: "You have just been hired by a witch to help rebuild her gingerbread house after some kids chewed on it. She tells you she wants to completely rebuild it. What kind of cookie building material do you use?",
+    useDate: "2024-09-25",
+    rating: 0
+  },
+  {
+    question: "You have been turned into a plant. How do you eat? Do you photosynthesize, attract insects/animals, trap insects/animals or something else?",
+    useDate: "2024-09-26",
+    rating: 0
+  },
+  {
+    question: "For one million dollars, you have to listen to 24 straight hours of one of the following: a 24 hour bongo solo or a 24 hour musical saw solo. Which choice gives you the best chance of making it to the million dollars and why?",
+    useDate: "2024-09-27",
+    rating: 0
+  }
 ]

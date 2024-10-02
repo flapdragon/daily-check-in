@@ -157,7 +157,7 @@ const CheckIn = () => {
         }
         <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
           <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-2">
-            <form className="w-full max-w-lg" onSubmit={handleSubmit}>
+            <form className="w-full max-w-2xl" onSubmit={handleSubmit}>
               <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                   <label className="block uppercase tracking-wide text-gray-200 text-sm font-bold mb-2" htmlFor="grid-first-name">
@@ -205,7 +205,9 @@ const CheckIn = () => {
               <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full px-3">
                   <label className="block uppercase tracking-wide text-gray-200 text-sm font-bold mb-2" htmlFor="silly">
-                    {question}
+                    {question.split("<br />").map((i, key) => {
+                      return <div key={key}>{i}</div>
+                    })}
                   </label>
                   <input
                     id="silly"
