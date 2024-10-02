@@ -11,7 +11,7 @@ const questionsGetDaily = async (req, res) => {
     // Get question with today's date
     const today = new Date()
     // If weekday, use actual date, else use hard-coded date (for UTC do +7)
-    const date = today.getDay() > 0 && today.getDay() < 6 ? today : new Date("2024-07-08T07:00:01.000Z")
+    const date = today.getDay() > 0 && today.getDay() < 6 ? today : new Date("2024-10-18T07:00:01.000")
     // let date = new Date()
     let dateString = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`
     // Get daily question from MongoDB questions collection

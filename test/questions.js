@@ -1,12 +1,13 @@
 import request from "request"
-import { questions } from "./questions-data.js"
+// import { questions } from "./questions-data.js"
+import { questions } from "./questions-data-3.js"
 
 // Schema
 // question: String,
 // useDate: Boolean,
 // rating: Number // TODO: Not implemented yet, thinking of a do you like this question kind of thing for feedback
 
-const action = "bulk_add"
+const action = "bulk_create"
 const startAt = 15
 const id = ""
 const port = 8888
