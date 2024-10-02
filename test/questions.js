@@ -1,6 +1,6 @@
 import request from "request"
-// import { questions } from "./questions-data.js"
-import { questions } from "./questions-data-3.js"
+// import { questions } from "./questions-data-load.js"
+import { questions } from "./questions-data.js"
 
 // Schema
 // question: String,

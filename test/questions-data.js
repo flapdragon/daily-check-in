@@ -1,21 +1,21 @@
 export const questions = [
   {
-    question: "If you could have any superpower, what would it be?",
+    question: "Do you think dogs or cats are cooler?",
     useDate: "2024-07-08",
     rating: 0
   },
   {
-    question: "What would you do if you woke up tomorrow as your teacher?", // This one needs to be later in the class year lol
+    question: "If you could have any superpower, what would it be?",
     useDate: "2024-07-09",
     rating: 0
   },
   {
-    question: "If you could only eat one food for the rest of your life, what would it be?",
+    question: "What would you do if you woke up tomorrow as your teacher?",
     useDate: "2024-07-10",
     rating: 0
   },
   {
-    question: "Do you think dogs or cats are cooler?",
+    question: "If you could only eat one food for the rest of your life, what would it be?",
     useDate: "2024-07-11",
     rating: 0
   },
@@ -25,7 +25,7 @@ export const questions = [
     rating: 0
   },
   {
-    question: "If you could change your name to anything, what would you pick?",
+    question: "What is your favorite joke?",
     useDate: "2024-07-15",
     rating: 0
   },
@@ -45,7 +45,7 @@ export const questions = [
     rating: 0
   },
   {
-    question: "If you could have lunch with one person from history, what would you eat?",
+    question: "If you could change your name to anything, what would you pick?",
     useDate: "2024-07-19",
     rating: 0
   },
@@ -296,6 +296,81 @@ export const questions = [
   {
     question: "For one million dollars, you have to listen to 24 straight hours of one of the following: a 24 hour bongo solo or a 24 hour musical saw solo. Which choice gives you the best chance of making it to the million dollars and why?",
     useDate: "2024-09-27",
+    rating: 0
+  },
+  {
+    question: "Would you rather have bionic arms or bionic legs?",
+    useDate: "2024-09-30",
+    rating: 0
+  },
+  {
+    question: "You just became a member of the Spice Girls. What is your Spice name? (Can't use an existing spice)",
+    useDate: "2024-10-01",
+    rating: 0
+  },
+  {
+    question: "What's one super power you would NOT want and why?",
+    useDate: "2024-10-02",
+    rating: 0
+  },
+  {
+    question: "So, do you like bread?",
+    useDate: "2024-10-03",
+    rating: 0
+  },
+  {
+    question: "If you could have a back-up band follow you around wherever you go, what type of band would it be and what type(s) of music would they play?",
+    useDate: "2024-10-04",
+    rating: 0
+  },
+  {
+    question: "If there are 100 wolves and you shoot one, how many wolves are there now?",
+    useDate: "2024-10-07",
+    rating: 0
+  },
+  {
+    question: "If you're walking in a forest and you trip over a bear, what color is the bear?",
+    useDate: "2024-10-08",
+    rating: 0
+  },
+  {
+    question: "If you're writing a story about a character who is writing a story, which character is more real?",
+    useDate: "2024-10-09",
+    rating: 0
+  },
+  {
+    question: "If you could learn any skill instantly (can't be JavaScript), what would it be and why?",
+    useDate: "2024-10-10",
+    rating: 0
+  },
+  {
+    question: "If you're standing on the shore of a lake, and you throw a pebble into the water, does the sound of it hitting the water travel faster than the pebble?",
+    useDate: "2024-10-11",
+    rating: 0
+  },
+  {
+    question: "Which of these has the most Legs?<br />A. Seven Bald Eagles  B. Five Spotty Dogs  C. Three Hairy Spiders",
+    useDate: "2024-10-14",
+    rating: 0
+  },
+  {
+    question: "Which of these is NOT an anagram of a color?<br />A. SLIVER  B. LUBE  C. GENRE  D. RIPPLE",
+    useDate: "2024-10-15",
+    rating: 0
+  },
+  {
+    question: "If January is Month 1, which of these three comes first alphabetically?<br />A. Month 6  B. Month 7  C. Month 8",
+    useDate: "2024-10-16",
+    rating: 0
+  },
+  {
+    question: "Which name would come next in this sequence: Marie, Annabelle, Norah, Olivia, Leah...<br />A. Alison  B. Irene  C. Una  D. Elizabeth",
+    useDate: "2024-10-17",
+    rating: 0
+  },
+  {
+    question: "What occurs once in a minute, twice in a moment and never in a century?",
+    useDate: "2024-10-18",
     rating: 0
   }
 ]
