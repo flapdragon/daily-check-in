@@ -20,5 +20,5 @@ const csDayOfWeek = date.getDay()
 const dayOfWeekday = csDayOfWeek > 0 && csDayOfWeek < 6 ? csDayOfWeek - 1 : 0  // Ignore Sundays so that records don't get skipped, so - 1
 const weekOfMonth = Math.ceil((dayOfMonth - 1 - csDayOfWeek) / 7) // 0 based
 const index = (weekOfMonth * 5) + dayOfWeekday
-console.log(dayOfWeekday, weekOfMonth, index)
+// console.log(dayOfWeekday, weekOfMonth, index)
 export const womanInCS = womenInCS[index]

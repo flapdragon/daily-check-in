@@ -3,8 +3,6 @@ import axios from 'axios'
 import MoodChart from '../charts/MoodChart'
 import { server, dailyImage, womanInCS } from '../utils/utils'
 
-console.log(server)
-
 // TODO: Add more background images (already downloaded)
 
 const Confirmation = () => {
