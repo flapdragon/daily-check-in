@@ -35,6 +35,6 @@ npm run dev
 
 ## Todo
 - Add snapshots to README
-- Add HuggingFace sentiment analysis or text analysis for answers on silly questions to get data into chart friendly form
+- Add sentiment analysis or text analysis for answers on silly questions to get data into chart friendly form
 - Add year level time series charts for yearly summaries
 
