@@ -1,7 +1,7 @@
 import { womenInCS } from '../data/women-in-cs'
 
-// Get server from Node process.env or default localhost
-export const server = process.env.REACT_APP_SERVER_URL ? `http://${process.env.REACT_APP_SERVER_URL}:8888` : "http://localhost:8888"
+// Get server from Node import.meta.env or default localhost
+export const server = import.meta.env.VITE_SERVER_URL ? `http://${import.meta.env.VITE_SERVER_URL}:8888` : "http://localhost:8888"
 
 // Get random image, 1 per day
 const today = new Date()

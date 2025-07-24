@@ -36,7 +36,7 @@ const Confirmation = () => {
   return (
     <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
       <img
-        src={require(`../images/${dailyImage}`)}
+        src={new URL(`../images/${dailyImage}`, import.meta.url).href}
         alt=""
         className="opacity-50 brightness-08 absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center" />
       <div className="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl" aria-hidden="true">

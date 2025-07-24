@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 .Toastify__progress-bar-theme--dark {
     background: #a855f7 !important;

@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router'
 import CheckIn from './checkIn/CheckIn'
 import Confirmation from './checkIn/Confirmation'
 import Results from './instructor/Results'
