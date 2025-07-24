@@ -30,7 +30,7 @@ npm run dev
 cd client
 npm install
 # also running locally
-npm start
+npm run dev
 ```
 
 ## Todo
