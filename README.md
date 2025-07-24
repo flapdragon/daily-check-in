@@ -7,7 +7,7 @@ Inspired by @audieannie and her "Success in Education" talk from the [CS50 Educa
 
 ## Technology
 
-- React/create-react-app
+- React/Vite
 - TailwindCSS
 - Node/Express.js
 - MongoDB
