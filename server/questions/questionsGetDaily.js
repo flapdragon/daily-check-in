@@ -16,6 +16,7 @@ const questionsGetDaily = async (req, res) => {
     let dateString = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`
     // Get daily question from MongoDB questions collection
     const question = await Questions.findOne({ "useDate": dateString })
+    console.log("question", question)
     // API response
     res.status(200).json(question)
   }

@@ -1,7 +1,9 @@
-import { useState, useEffect, useId } from 'react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import { server, dailyImage, womanInCS } from '../utils/utils'
+import { useState, useEffect, useId } from "react"
+import { useNavigate } from "react-router-dom"
+import axios from "axios"
+import { ToastContainer, toast, Bounce } from "react-toastify"
+import { server, dailyImage, womanInCS } from "../utils/utils"
+import "react-toastify/dist/ReactToastify.css"
 
 const CheckIn = () => {
   // TODO: MAYBE - Have some sort of logic to only show during course days? I could literally just not fire up the server until those days. Not sure yet.
@@ -58,6 +60,30 @@ const CheckIn = () => {
       setPlaceHolder(womanInCS)
       // Get daily question
       getDailyQuestion()
+      // const toastText = `👽 The 👽 aliens 👽 have 👽 landed 👽`
+      // const toastText = `🏰 & 🐉`
+      // const toastText = `You can get with this, or you can get with that 🐑`
+      // const toastText = `You can get with this, or you can get with that. Part 🐑 🐑`
+      // const toastText = `🔨🏰`
+      const toastText = `☕🍩☕🍩☕🍩☕🍩☕🍩`
+      // Toast
+      toast(toastText, {
+        position: "top-right",
+        autoClose: 16000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce
+        });
+      console.log(" _          _ _             _                _\n\
+| |__   ___| | | ___     __| | _____   _____| | ___  _ __   ___ _ __\n\
+| '_ \\ / _ \\ | |/ _ \\   / _` |/ _ \\ \\ / / _ \\ |/ _ \\| '_ \\ / _ \\ '__|\n\
+| | | |  __/ | | (_) | | (_| |  __/\\ V /  __/ | (_) | |_) |  __/ |\n\
+|_| |_|\\___|_|_|\\___/   \\__,_|\\___| \\_/ \\___|_|\\___/| .__/ \\___|_|\n\
+                                                    |_| ")
     }
   }, [])
 
@@ -206,7 +232,7 @@ const CheckIn = () => {
                 <div className="w-full px-3">
                   <label className="block uppercase tracking-wide text-gray-200 text-sm font-bold mb-2" htmlFor="silly">
                     {question.split("<br />").map((i, key) => {
-                      return <div key={key}>{i}</div>
+                      return <div key={key} dangerouslySetInnerHTML={{__html: i }}></div>
                     })}
                   </label>
                   <input
@@ -273,6 +299,7 @@ const CheckIn = () => {
           </dl>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }
