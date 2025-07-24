@@ -6,6 +6,24 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
 
+
+  const handleCountClick = () => {
+    console.log("handleCountClick")
+    const randomCurrent = Math.floor(Math.random() * (100 - 0) + 0)
+    console.log("randomCurrent", randomCurrent)
+    if (count === randomCurrent) {
+      const randomNew = Math.floor(Math.random() * (500 - 0) + 0)
+      console.log("randomNew", randomNew)
+      setCount(randomNew)
+    }
+    else if (count === 500) {
+      setCount(-1)
+    }
+    else {
+      setCount((count) => count + 1)
+    }
+  }
+
   return (
     <>
       <div>
@@ -18,7 +36,7 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button onClick={handleCountClick}>
           count is {count}
         </button>
         <p>
